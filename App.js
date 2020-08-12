@@ -7,29 +7,17 @@
  */
 
 import React, {useState, useEffect} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-  TouchableHighlight,
-} from 'react-native';
-
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {StyleSheet, View, Text, TouchableHighlight} from 'react-native';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 import TouchID from 'react-native-touch-id';
+import * as Animatable from 'react-native-animatable';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const App: () => React$Node = () => {
+  Icon.loadFont();
   const [supported, setSupported] = useState(null);
-  const [nome, setNome] = useState('Anônimo');
+  const [nome, setNome] = useState('Anônimu');
 
   useEffect(() => {
     TouchID.isSupported()
@@ -61,12 +49,15 @@ const App: () => React$Node = () => {
 
   return (
     <View style={styles.sectionContainer}>
-      <TouchableHighlight onPress={handleLogin}>
-        <Text style={[styles.highlight, styles.btn]}>Entrar</Text>
-      </TouchableHighlight>
-
       <Text style={styles.sectionTitle}>App Touch-ID</Text>
       <Text style={styles.sectionDescription}>{nome}</Text>
+      <View>
+        <Icon name="telegram" size={55} color="#000"></Icon>
+      </View>
+
+      <TouchableHighlight style={styles.btn} onPress={handleLogin}>
+        <Text style={[styles.highlight]}>Entrar</Text>
+      </TouchableHighlight>
     </View>
   );
 };
@@ -76,8 +67,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    // marginTop: 32,
-    // paddingHorizontal: 24,
   },
   sectionTitle: {
     fontSize: 24,
@@ -92,13 +81,17 @@ const styles = StyleSheet.create({
   },
   highlight: {
     fontWeight: '700',
+    color: '#ffffff',
   },
   btn: {
     color: '#ffffff',
     borderRadius: 4,
-    marginBottom: 15,
+    marginTop: 15,
     backgroundColor: '#0391d7',
-    padding: 15,
+    padding: 10,
+    alignContent: 'center',
+    alignItems: 'center',
+    width: '80%',
   },
 });
 
